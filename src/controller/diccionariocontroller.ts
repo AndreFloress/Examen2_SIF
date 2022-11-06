@@ -15,8 +15,8 @@ export class DiccionarioControllers{
     }
 
     async getDiccionario(req: Request , res: Response): Promise<Response>{
-        const diccionario = await diccionarioservice.getDiccionario;
-        return res.json()
+        const diccionario = diccionarioservice.getDiccionario;
+        return res.json(diccionario)
     } 
 
     
