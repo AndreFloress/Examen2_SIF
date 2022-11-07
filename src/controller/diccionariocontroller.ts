@@ -1,3 +1,4 @@
+import { plainToClass } from "@nestjs/class-transformer";
 import { Router, Request, Response } from "express";
 import diccionarioservice from "../services/diccionarioservice";
 
@@ -35,6 +36,11 @@ export class DiccionarioControllers{
         const palabra = await diccionarioservice.getListByCategoria(categoria);
         return res.json(palabra);
     }
-    
 
+    /*
+    async create(req: Request , res: Response): Promise<Response>{
+       
+    }
+    
+*/
 }

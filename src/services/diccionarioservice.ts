@@ -6,14 +6,17 @@ class DiccionarioService{
 
     public diccionario=[]; //almacenar los datos del json de manera temporal
 
+    newData=[
+        {"palabra": "oso" , "categoria": "animal"}
+    ]
+
     constructor(){
         const path_rutas = path.dirname(__dirname) + '/data/palabras.json'
         this.diccionario = JSON.parse(fs.readFileSync( path_rutas , {encoding: 'utf-8'}))
-        //this.diccionario = JSON.parse(fs.writeFileSync(path_rutas, {encoding: 'utf-8'}))
     }
 
     public async getList(){
-        return this.diccionario
+        return this.diccionario[3].palabra
     }
 
     public async getListByCategoria(categoria: string){
@@ -24,6 +27,10 @@ class DiccionarioService{
     public async getNombre(palabra: string){
         const word = this.diccionario.find((c) => c.palabra == palabra)
         return word;
+    }
+
+    public async create(){
+       
     }
 }
 
