@@ -1,14 +1,12 @@
 import fs from 'fs' //leer archivo .json y para escribir en archivo
 import path from 'path' //modulo de node para realizar acciones con rutas de archivos
 import { Json } from 'sequelize/types/utils';
+import { DiccionarioDTOS } from '../dtos/create-diccionario.dto';
 
 class DiccionarioService{
 
     public diccionario=[]; //almacenar los datos del json de manera temporal
 
-    newData=[
-        {"palabra": "oso" , "categoria": "animal"}
-    ]
 
     constructor(){
         const path_rutas = path.dirname(__dirname) + '/data/palabras.json'
@@ -16,7 +14,7 @@ class DiccionarioService{
     }
 
     public async getList(){
-        return this.diccionario[3].palabra
+        return this.diccionario
     }
 
     public async getListByCategoria(categoria: string){
@@ -28,10 +26,17 @@ class DiccionarioService{
         const word = this.diccionario.find((c) => c.palabra == palabra)
         return word;
     }
+         
+    public async create(diccionarioDTOS: DiccionarioDTOS){
 
-    public async create(){
-       
+        this.diccionario.push({
+         ...diccionarioDTOS  
+     })
+
+     fs.writeFileSync(JSON.stringify(this.diccionario) , 'w+')
+    
     }
+
 }
 
 export default new DiccionarioService();
